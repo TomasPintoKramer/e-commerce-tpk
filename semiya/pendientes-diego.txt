@@ -1,0 +1,11 @@
+semiya/src/state/totalAmount.js
+    arreglar el return falopa con un if antes
+
+semiya/src/components/Home.js
+    ver el tema de los productos random para que no quede harcodeado.
+
+semiya/src/components/Contact.js
+    fijarse el href del "envianos un mail" y ver como es 
+
+semiya/src/components/Admin/UpdateProduct.js
+    ver que onda el useState de selectedProduct y los states de todo el resto

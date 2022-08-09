@@ -1,11 +1,10 @@
-const { createAsyncThunk, createReducer } = require("@reduxjs/toolkit");
-const axios = require("axios");
+import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const myPurchasesRequest = createAsyncThunk(
-  "SEND_myPurchases_REQUEST",
-  (undefined, thunkAPI) => {
-    const {user} = thunkAPI.getState()
-    console.log("🚀 ~ file: myPurchases.js ~ line 8 ~ thunkAPI.getState()", thunkAPI.getState())
+  "SEND_MY_PURCHASES_REQUEST",
+  (data, thunkAPI) => {
+    const { user } = thunkAPI.getState();
     const { id } = user;
     return axios.get(`/api/purchases/${id}`).then((res) => res.data);
   }

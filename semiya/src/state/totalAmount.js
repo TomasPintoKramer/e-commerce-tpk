@@ -2,12 +2,12 @@ import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 export const totalAmount = createAsyncThunk(
   "SET_TOTAL_AMOUNT",
-  (undefined, thunkAPI) => {
+  (data, thunkAPI) => {
     const thunk = thunkAPI.getState();
 
-    return thunk.cart && thunk.cart.reduce((suma, item) => {
+    return (thunk.cart && thunk.cart.reduce((suma, item) => {
       return (suma += item.price);
-    }, 0) || 0;  
+    }, 0)) || 0;  
   }
 );
 

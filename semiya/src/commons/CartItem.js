@@ -27,11 +27,11 @@ const CartItem = ({ product }) => {
   };
 
   useEffect(() => {
-    if(quantity.trigger == "increase"){
+    if(quantity.trigger === "increase"){
       dispatch(addToCart(product));
       setQuantity({amount: quantity.amount, trigger: ""})
     }
-    if(quantity.trigger == "decrease"){
+    if(quantity.trigger === "decrease"){
         
       dispatch(removeOne(product));
       setQuantity({amount: quantity.amount, trigger: ""})

@@ -2,11 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../commons/CartItem";
 import { clearCart } from "../state/cart";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { clearVirtualCart } from "../state/virtualCart";
 
 const ShoppingCart = () => {
-  const virtualCart = useSelector(state => state.virtualCart);
+  const virtualCart = useSelector((state) => state.virtualCart);
   const totalAmount = useSelector((state) => state.totalAmount);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,10 +43,7 @@ const ShoppingCart = () => {
         <h3>TOTAL $</h3> */}
         <div className="row d-flex justify-content-end">
           <div className="col-sm d-flex justify-content-end">
-            <button
-              onClick={cleanCart}
-              className="Shopping-secondary-button"
-            >
+            <button onClick={cleanCart} className="Shopping-secondary-button">
               EMPTY CART
             </button>
           </div>
@@ -55,11 +52,16 @@ const ShoppingCart = () => {
             <h4>{`TOTAL $ ${totalAmount}`}</h4>
           </div>
 
-            <button onClick={(e) => {
+          <button
+            onClick={(e) => {
               e.preventDefault();
               navigate("/shopping-cart/check-out");
-            }} disabled={!virtualCart.length} className="shopping-button">GO CHECKOUT!</button>
-
+            }}
+            disabled={!virtualCart.length}
+            className="shopping-button"
+          >
+            GO CHECKOUT!
+          </button>
         </div>
       </div>
     </>

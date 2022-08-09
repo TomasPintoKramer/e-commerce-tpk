@@ -36,7 +36,7 @@ const UserPurchases = () => {
               <td>{purchase.createdAt.slice(0, 10)}</td>
                 <td>
               <Link to={`/profile/1/purchases/${i}`}>
-                  {purchase.cart.lenght != 0 && (
+                  {purchase.cart.lenght !== 0 && (
                     <p style={{ fontSize: "0.75em", color:"black" }}>
                       {purchase.cart.slice(0, 4).map((product, i) => (
                        <div key={i}> <span key={i}>

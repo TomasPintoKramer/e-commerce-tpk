@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // import useInput from "../../hooks/useInput";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,8 @@ import { updateRequest } from "../../state/admin/updateForAdmin";
 import { defaultProductRequest } from "../../state/defaultProducts";
 
 const UpdateProduct = () => {
-  const [selectedProduct, setSelectedProduct] = useState(0);
+  // const [selectedProduct, setSelectedProduct] = useState(0);
+  const [selectedProduct] = useState(0);
   const user = useSelector((state) => state.user);
   // const products = useSelector((state) => state.defaultProducts);
   const singleProduct = useSelector((state) => state.singleProduct);
@@ -18,7 +19,7 @@ const UpdateProduct = () => {
   const [image, setImage] = useState(singleProduct?.image);
   const [description, setDescription] = useState(singleProduct?.description);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -34,11 +35,11 @@ const UpdateProduct = () => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(singleProductRequest(selectedProduct));
 
-    console.log("🚀 Desde useEffect", selectedProduct)
-  }, [selectedProduct])
+    console.log("🚀 Desde useEffect", selectedProduct);
+  }, [selectedProduct]);
 
   return (
     <>
@@ -145,7 +146,9 @@ const UpdateProduct = () => {
             id="inputDescription"
             placeholder="Description"
             aria-describedby="DescriptionHelp"
-            defaultValue={singleProduct.description ? singleProduct.description : ""}
+            defaultValue={
+              singleProduct.description ? singleProduct.description : ""
+            }
             onChange={(e) => {
               setDescription(e.target.value);
             }}

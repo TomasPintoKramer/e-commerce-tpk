@@ -1,5 +1,5 @@
-const { createAsyncThunk, createReducer } = require("@reduxjs/toolkit");
-const axios = require("axios");
+import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const singleProductRequest = createAsyncThunk(
   "SEND_SINGLEPRODUCT_REQUEST",
