@@ -1,10 +1,10 @@
-const { createAsyncThunk, createReducer } = require("@reduxjs/toolkit");
-const axios = require("axios");
+import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const filteredCategoryRequest = createAsyncThunk(
   "SEND_FILTEREDCATEGORY_REQUEST",
-  (undefined, thunkAPI) => {
-    const {wayToFilter} = thunkAPI.getState()
+  (data, thunkAPI) => {
+    const { wayToFilter } = thunkAPI.getState();
 
     const { value } = wayToFilter;
     return axios.get(`/api/categories/${value}`).then((res) => res.data);

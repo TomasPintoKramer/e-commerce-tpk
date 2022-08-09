@@ -11,7 +11,6 @@ import { totalAmountReducer } from "./totalAmount";
 import { userReducer } from "./user";
 import { virtualCartReducer } from "./virtualCart";
 import { setWayToFilterReducer } from "./wayToFilter";
-import { totalReducer } from "./totalAmount";
 import { deleteRequestReducer } from "./admin/deleteForAdmin";
 import { updateRequestReducer } from "./admin/updateForAdmin";
 import { addRequestReducer } from "./admin/addForAdmin";
@@ -33,8 +32,8 @@ const store = configureStore({
     totalAmount: totalAmountReducer,
     updateRequest: updateRequestReducer,
     deleteRequest: deleteRequestReducer,
-    addRequest:addRequestReducer, 
-    myPurchases:myPurchasesReducer
+    addRequest: addRequestReducer,
+    myPurchases: myPurchasesReducer,
   },
 });
 

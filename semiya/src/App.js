@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Routes, Route, Navigate, useNavigate, useMatch } from "react-router";
 import Header from "./components/Header";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import ProductList from "./commons/ProductList.js";
@@ -22,7 +22,7 @@ import { setUser } from "./state/user";
 import Profile from "./components/Profile";
 import Admin from "./components/Admin";
 import UserPurchases from "./components/UserPurchases.js";
-import PastPurchase from './components/PastPurchase.js'
+import PastPurchase from "./components/PastPurchase.js";
 import NewProduct from "./components/Admin/NewProduct";
 import UpdateProduct from "./components/Admin/UpdateProduct";
 import NewCategory from "./components/Admin/NewCategory";
@@ -39,19 +39,20 @@ import DeleteCategory from "./components/Admin/DeleteCategory";
 function App() {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
   const wayToFilter = useSelector((state) => state.wayToFilter);
-  const [storageCart, setStorageCart] = useLocalStorage("cart", cart);
-  const [storageUser, setStorageUser] = useLocalStorage("user", "");
+  const [, setStorageCart] = useLocalStorage("cart", cart);
+  const [, setStorageUser] = useLocalStorage("user", "");
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(defaultProductRequest()).then(() => dispatch(renderedProducts()));
     dispatch(defaultCategoriesRequest());
     const localUser = JSON.parse(localStorage.getItem("user"));
-    localUser && dispatch(setUser())
-    .then((user)=> user.payload && setStorageUser(user.payload))
-    .catch((err)=>console.log(err));
+    localUser &&
+      dispatch(setUser())
+        .then((user) => user.payload && setStorageUser(user.payload))
+        .catch((err) => console.log(err));
     !cart.length && dispatch(updateFromStorage());
   }, []);
 
@@ -72,7 +73,7 @@ function App() {
 
   useEffect(() => {
     dispatch(totalAmount());
-    cart.length && dispatch(virtualCart())
+    cart.length && dispatch(virtualCart());
     cart.length && setStorageCart(cart);
   }, [cart]);
 
@@ -91,14 +92,35 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/profile/:id/purchases" element={<UserPurchases />} />
-          <Route path="/profile/1/purchases/:purchaseId" element={<PastPurchase />} />
+          <Route
+            path="/profile/1/purchases/:purchaseId"
+            element={<PastPurchase />}
+          />
           <Route path="/profile/:id/admin" element={<Admin />} />
-          <Route path="/profile/:id/admin/new-product" element={<NewProduct />} />
-          <Route path="/profile/:id/admin/delete-product" element={<DeleteProduct />} />
-          <Route path="/profile/:id/admin/update-product" element={<UpdateProduct />} />
-          <Route path="/profile/:id/admin/new-category" element={<NewCategory />} />
-          <Route path="/profile/:id/admin/update-category" element={<UpdateCategory />} />
-          <Route path="/profile/:id/admin/delete-category" element={<DeleteCategory />} />
+          <Route
+            path="/profile/:id/admin/new-product"
+            element={<NewProduct />}
+          />
+          <Route
+            path="/profile/:id/admin/delete-product"
+            element={<DeleteProduct />}
+          />
+          <Route
+            path="/profile/:id/admin/update-product"
+            element={<UpdateProduct />}
+          />
+          <Route
+            path="/profile/:id/admin/new-category"
+            element={<NewCategory />}
+          />
+          <Route
+            path="/profile/:id/admin/update-category"
+            element={<UpdateCategory />}
+          />
+          <Route
+            path="/profile/:id/admin/delete-category"
+            element={<DeleteCategory />}
+          />
           <Route path="/contact" element={<Contact />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" />} />

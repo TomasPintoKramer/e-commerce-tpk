@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import Carousel from "react-bootstrap/Carousel";
@@ -6,16 +6,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ProductItem from "../commons/ProductItem.js";
 
 const Home = () => {
-  const user = useSelector((state) => state.user);
-  const filteredProducts = useSelector((state) => state.filteredProducts);
+  // const user = useSelector((state) => state.user);
+  // const filteredProducts = useSelector((state) => state.filteredProducts);
   const defaultProducts = useSelector((state) => state.defaultProducts);
-  const randomNumbers = []
-
-  useEffect(()=>{
-    for (let i = 0; i < 5; i++) {
-      randomNumbers.push(Math.floor(Math.random()*(defaultProducts.lenght)))
-    }
-  }, [])
 
   return (
     <>
@@ -55,8 +48,7 @@ const Home = () => {
       <div className="main-container">
         <div className="cards-container">
           {defaultProducts.map((product, i) => {
-            if (i % 16 === 0)
-              return <ProductItem key={i} product={product} />;
+            if (i % 16 === 0) return <ProductItem key={i} product={product} />;
           })}
         </div>
       </div>

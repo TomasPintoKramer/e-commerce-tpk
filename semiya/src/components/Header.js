@@ -64,7 +64,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <a onClick={logoutHandler} aria-current="page" href="#">
+                <a onClick={logoutHandler} aria-current="page" href="/">
                   LOG OUT
                 </a>
               </li>

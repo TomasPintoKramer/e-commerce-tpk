@@ -1,28 +1,27 @@
-import useLocalStorage from "../hooks/useLocalStorage";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const loginRequest = createAsyncThunk("SEND_LOGIN_REQUEST", (data) => {
+export const loginRequest = createAsyncThunk("SEND_LOGIN_REQUEST", (data, thunkAPI) => {
   return axios.post("/api/users/login", data).then((res) => {
     delete res.data.password;
     delete res.data.salt;
     return res.data;
   });
 });
-export const logoutRequest = createAsyncThunk("SEND_LOGOUT_REQUEST", (data) => {
+export const logoutRequest = createAsyncThunk("SEND_LOGOUT_REQUEST", (data, thunkAPI) => {
   return axios.post("/api/users/logout", data).then((res) => res.data);
 });
 
 export const promoteAdminRequest = createAsyncThunk(
   "SEND_PROMOTION_REQUEST",
-  (data) => {
+  (data, thunkAPI) => {
     return axios.put("/api/users/promote", data).then((res) => res.data);
   }
 );
 export const editUserRequest = createAsyncThunk(
   "SEND_EDIT_USER_REQUEST",
-  (data) => {
-    const {id, body}=data
+  (data, thunkAPI) => {
+    const { id, body } = data;
     return axios.put(`/api/users/update/${id}`, body).then((res) => res.data);
   }
 );
@@ -30,7 +29,7 @@ export const editUserRequest = createAsyncThunk(
 export const setUser = createAsyncThunk("SET_USER", () => {
   const localUser = JSON.parse(localStorage.getItem("user"));
 
-  if (localUser != null) {
+  if (localUser !== null) {
     return axios
       .get("/api/users/me")
       .then((response) =>
@@ -49,7 +48,7 @@ export const userReducer = createReducer(
       localStorage.setItem("user", JSON.stringify(action.payload)),
     [setUser.fulfilled]: (state, action) => action.payload,
     [logoutRequest.fulfilled]: (state, action) =>
-      action.payload === "OK" && localStorage.setItem("user",null),
+      action.payload === "OK" && localStorage.setItem("user", null),
     [promoteAdminRequest.fulfilled]: (state, action) =>
       localStorage.setItem("user", JSON.stringify(action.payload)),
     [editUserRequest.fulfilled]: (state, action) =>

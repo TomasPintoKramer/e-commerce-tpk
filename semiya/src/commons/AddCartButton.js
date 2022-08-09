@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../state/cart';
 
 
 
 const AddCartButton = ({product}) => {
-  const [disabled, setDisabled] = useState(false);
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 

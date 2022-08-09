@@ -1,8 +1,8 @@
-const { createAsyncThunk, createReducer } = require("@reduxjs/toolkit");
+import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 export const renderedProducts = createAsyncThunk(
   "SET_RENDERED_PRODUCTS",
-  (undefined, thunkAPI) => {
+  (data, thunkAPI) => {
     const thunk = thunkAPI.getState();
 
     if (!thunk.wayToFilter.type) return thunk.defaultProducts;

@@ -1,7 +1,7 @@
 import React from "react";
 import useInput from "../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { setWayToFilter } from "../state/wayToFilter";
 
 const Search = () => {
@@ -13,15 +13,18 @@ const Search = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("🚀 ~ file: Search.js ~ line 18 ~ submitHandler ~ e.target[0].value", e.target[0].value)
+    // console.log(
+    //   "🚀 ~ file: Search.js ~ line 18 ~ submitHandler ~ e.target[0].value",
+    //   e.target[0].value
+    // );
     const nameQuery = { value: product.value, type: "name" };
-    e.target[0].value=''
-    product.onChange()
-    nameQuery.value ?
-      dispatch(setWayToFilter(nameQuery)):
-      alert('Por favor indique algun parametro de busqueda')
-    navigate(`/products?${nameQuery.type}=${nameQuery.value}`)
-    };
+    e.target[0].value = "";
+    product.onChange();
+    nameQuery.value
+      ? dispatch(setWayToFilter(nameQuery))
+      : alert("Por favor indique algun parametro de busqueda");
+    navigate(`/products?${nameQuery.type}=${nameQuery.value}`);
+  };
   return (
     <div className="container littleMargin">
       <form onSubmit={submitHandler}>
@@ -46,16 +49,16 @@ const Search = () => {
         <select
           className="form-select form-select-sm"
           aria-label="Small select"
-          onChange={(e)=>{
-            const filterObj = {value:e.target.value, type:'category'};
-            dispatch(setWayToFilter(filterObj))
-            navigate(`/products?${filterObj.type}=${filterObj.value}`)
-          }} 
+          onChange={(e) => {
+            const filterObj = { value: e.target.value, type: "category" };
+            dispatch(setWayToFilter(filterObj));
+            navigate(`/products?${filterObj.type}=${filterObj.value}`);
+          }}
         >
           <option defaultValue="">Categories</option>
           {categories.map((category, i) => (
             <option key={i} value={category.name}>
-                {category.name}
+              {category.name}
             </option>
           ))}
         </select>

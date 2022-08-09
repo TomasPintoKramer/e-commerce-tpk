@@ -1,11 +1,18 @@
-const { createAsyncThunk, createReducer, createAction } = require("@reduxjs/toolkit");
+import {
+  createAsyncThunk,
+  createReducer,
+  createAction,
+} from "@reduxjs/toolkit";
 
 export const virtualCart = createAsyncThunk(
   "SET_VIRTUAL_CART",
-  (undefined, thunkAPI) => {
+  (data, thunkAPI) => {
     const thunk = thunkAPI.getState();
 
-    return thunk.cart && thunk.cart.filter((item, i) => thunk.cart.indexOf(item) === i);
+    return (
+      thunk.cart &&
+      thunk.cart.filter((item, i) => thunk.cart.indexOf(item) === i)
+    );
   }
 );
 
