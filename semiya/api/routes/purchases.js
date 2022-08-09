@@ -13,23 +13,29 @@ Users.findByPk(id)
 .then((user)=> 
     Purchases.create(req.body)
       .then((purchase) => purchase.setAuthor(user))
-      // .then(()=> testAccount =  nodemailer.createTestAccount())
-    //   .then(()=>{ transporter = nodemailer.createTransport({
-    //     host: "smtp.ethereal.email",
-    //     port: 587,
-    //     secure: false, // true for 465, false for other ports
-    //     auth: {
-    //       user: testAccount.user, // generated ethereal user
-    //       pass: testAccount.pass, // generated ethereal password
-    //     },
-    //   });})
-    //   .then(()=>transporter.sendMail({
-    //     from: testAccount, // sender address
-    //     to: req.body.email, // list of receivers
-    //     subject: `Tu orden llegara pronto.`, // Subject line
-    //     text: `Hola ${req.body.name}, tu pedido llegara a ${req.body.adress} en tan solo tres dias. Esperamos que disfrutes de tu compra!`, // plain text body
+      .then(()=>{ transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: 'magdalena.wisoky@ethereal.email',//fake email
+          pass: 'SgSzqGsAqhwD2Sf3PW', // generated ethereal password
+        },
+      });})
+      .then(()=>transporter.sendMail({
+        from: 'magdalena.wisoky@ethereal.email', // sender address
+        to: 'tomaspintokramer@hotmail.com', // list of receivers
+        subject: `Tu orden de SemiYA está en camino.`, // Subject line
+        text: `Hola ${req.body.name}, tu pedido llegara a ${req.body.shippingAdress} en tan solo tres dias. Esperamos que disfrutes de tu compra!`, // plain text body
      
-    //   }))
+      },(error, info)=>{
+        if(error){
+          res.status(500).send(error.message);
+        }else{
+          console.log('Email enviado')
+          res.status(200).jsonp(req.body);
+        }
+      }))
       .then((purchase) => res.send(purchase))
       .catch(next))
     .catch(next)

@@ -4,6 +4,7 @@ const app = express();
 const db = require("./db");
 const models = require("./models")
 const routes = require("./routes");
+const morgan= require('morgan')
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
@@ -16,7 +17,7 @@ const {Users} = require("./models")
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(morgan('dev'))
 app.use(cookieParser());
 
 app.use(session({

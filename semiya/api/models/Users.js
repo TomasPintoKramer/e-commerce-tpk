@@ -29,9 +29,9 @@ Users.init(
     password: {
       type: s.TEXT,
       allowNull: false,
-      validate: {
-        len: [4, 8],
-      },
+      // validate: {
+      //   // len: [4, 8],
+      // },
     },
     salt: {
       type: s.STRING,
